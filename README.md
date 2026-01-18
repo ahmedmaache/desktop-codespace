@@ -14,13 +14,13 @@ This repository is pre-configured with a **graphical desktop environment** that 
 ### Method 1: RDP (Recommended for Windows)
 This is the best experience on Windows using the built-in Remote Desktop Connection.
 
-1. Forward port 3389 to your local machine:
+1. Forward port 3389 to a **different local port** (3390) to avoid conflict with Windows:
    ```powershell
-   gh codespace ports forward 3389:3389 -c <codespace-name>
+   gh codespace ports forward 3390:3389 -c <codespace-name>
    ```
 2. Open **Remote Desktop Connection** (`mstsc.exe`)
-3. Connect to: `localhost:3389`
-4. Username: `codespace` (or your GitHub username)
+3. Connect to: `localhost:3390` ⚠️ Note: use 3390, NOT 3389!
+4. Username: `codespace`
 5. Password: `vscode`
 
 ### Method 2: Browser (No Setup Required)
