@@ -1,13 +1,12 @@
 {
-  "name": "Desktop Codespace with RDP",
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "name": "Ubuntu Desktop Codespace",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
   "features": {
     "ghcr.io/devcontainers/features/desktop-lite:1": {
       "version": "latest",
-      "password": "vscode",
-      "webPort": "6080",
-      "vncPort": "5901"
-    }
+      "password": "vscode"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "forwardPorts": [
     3389,
@@ -18,18 +17,9 @@
     "3389": {
       "label": "Desktop (RDP)",
       "onAutoForward": "notify"
-    },
-    "6080": {
-      "label": "Desktop (Web/noVNC)",
-      "onAutoForward": "silent"
-    },
-    "5901": {
-      "label": "Desktop (VNC)",
-      "onAutoForward": "silent"
     }
   },
-  "postCreateCommand": "chmod +x .devcontainer/setup-xrdp.sh && .devcontainer/setup-xrdp.sh",
-  "postStartCommand": "sudo /usr/sbin/xrdp || true",
+  "postCreateCommand": "bash .devcontainer/setup-ubuntu.sh",
   "customizations": {
     "vscode": {
       "extensions": [
