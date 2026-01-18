@@ -28,8 +28,8 @@
       "onAutoForward": "silent"
     }
   },
-  "postCreateCommand": "bash -c 'sudo apt-get update && sudo apt-get install -y xrdp xfce4 xfce4-goodies dbus-x11 && sudo sed -i \"s/^port=.*/port=3389/\" /etc/xrdp/xrdp.ini && echo \"xfce4-session\" | tee ~/.xsession && sudo chmod +x ~/.xsession && sudo service xrdp start && echo \"✅ Desktop ready! RDP on 3389, VNC on 5901, Web on 6080. Password: vscode\"'",
-  "postStartCommand": "sudo service xrdp start",
+  "postCreateCommand": "chmod +x .devcontainer/setup-xrdp.sh && .devcontainer/setup-xrdp.sh",
+  "postStartCommand": "sudo /usr/sbin/xrdp || true",
   "customizations": {
     "vscode": {
       "extensions": [
