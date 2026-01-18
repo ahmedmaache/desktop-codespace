@@ -4,6 +4,7 @@ set -e
 echo "🚀 Starting Ubuntu Setup..."
 
 # 1. Install Updates and Essentials
+export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update
 sudo apt-get install -y curl wget git xfce4 xfce4-goodies xrdp chromium-browser dbus-x11 xorg
 
