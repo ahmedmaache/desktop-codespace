@@ -3,10 +3,18 @@ set -e
 
 echo "🚀 Starting Ubuntu Setup..."
 
-# 1. Install Updates and Essentials
+# 0. Prevent Interactive Prompts (The "Nuclear" Option)
 export DEBIAN_FRONTEND=noninteractive
+export DEBIAN_PRIORITY=critical
+sudo echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
+
+# Pre-answer keyboard configuration
+echo "keyboard-configuration keyboard-configuration/layout select English (US)" | sudo debconf-set-selections
+echo "keyboard-configuration keyboard-configuration/layoutcode select us" | sudo debconf-set-selections
+
+# 1. Install Updates and Essentials
 sudo apt-get update
-sudo apt-get install -y curl wget git xfce4 xfce4-goodies xrdp chromium-browser dbus-x11 xorg
+sudo apt-get install -y curl wget git software-properties-common xfce4 xfce4-goodies xrdp chromium-browser dbus-x11 xorg
 
 # 2. Configure XRDP for Ubuntu
 echo "⚙️ Configuring XRDP..."
