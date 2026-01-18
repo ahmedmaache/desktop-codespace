@@ -1,5 +1,5 @@
 {
-  "name": "Desktop Codespace",
+  "name": "Desktop Codespace with RDP",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
     "ghcr.io/devcontainers/features/desktop-lite:1": {
@@ -9,18 +9,27 @@
       "vncPort": "5901"
     }
   },
-  "forwardPorts": [6080, 5901],
+  "forwardPorts": [
+    3389,
+    6080,
+    5901
+  ],
   "portsAttributes": {
-    "6080": {
-      "label": "Desktop (Web)",
+    "3389": {
+      "label": "Desktop (RDP)",
       "onAutoForward": "notify"
+    },
+    "6080": {
+      "label": "Desktop (Web/noVNC)",
+      "onAutoForward": "silent"
     },
     "5901": {
       "label": "Desktop (VNC)",
       "onAutoForward": "silent"
     }
   },
-  "postCreateCommand": "echo '✅ Desktop environment ready! Access via port 6080 (web) or 5901 (VNC). Password: vscode'",
+  "postCreateCommand": "bash -c 'sudo apt-get update && sudo apt-get install -y xrdp xfce4 xfce4-goodies dbus-x11 && sudo sed -i \"s/^port=.*/port=3389/\" /etc/xrdp/xrdp.ini && echo \"xfce4-session\" | tee ~/.xsession && sudo chmod +x ~/.xsession && sudo service xrdp start && echo \"✅ Desktop ready! RDP on 3389, VNC on 5901, Web on 6080. Password: vscode\"'",
+  "postStartCommand": "sudo service xrdp start",
   "customizations": {
     "vscode": {
       "extensions": [
